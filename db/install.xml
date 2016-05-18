@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="block/learning_analytics/db" VERSION="20101203" COMMENT="XMLDB file for Moodle block/learning_analytics"
+<XMLDB PATH="block/moodlean/db" VERSION="20101203" COMMENT="XMLDB file for Moodle block/moodlean"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
-    <TABLE NAME="learning_analytic_types" COMMENT="Available types for learning analytics">
+    <TABLE NAME="moodlean_analytic_types" COMMENT="Available types for learning analytics">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
         <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Name for analytic type"/>
@@ -17,7 +17,7 @@
       </INDEXES>
     </TABLE>
 
-    <TABLE NAME="learning_analytics" COMMENT="Learning analytics for courses">
+    <TABLE NAME="moodlean_analytics" COMMENT="Learning analytics for courses">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
         <FIELD NAME="course_id" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Name for analytic type"/>

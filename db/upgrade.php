@@ -24,8 +24,8 @@
  * it cannot do itself, it will tell you what you need to do.  The commands in
  * here will all be database-neutral, using the functions defined in DLL libraries.
  *
- * @package    block_analytics
- * @copyright  2015 Your Name
+ * @package    block_moodlean
+ * @copyright  2016 David Miguel de la Fuete <david.mdlf@gmail.com  >
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -37,7 +37,7 @@ defined('MOODLE_INTERNAL') || die();
  * @param int $oldversion
  * @return bool
  */
-function xmldb_analytics_upgrade($oldversion) {
+function xmldb_block_moodlean_upgrade($oldversion) {
     global $DB;
 
     $dbman = $DB->get_manager(); // Loads ddl manager and xmldb classes.

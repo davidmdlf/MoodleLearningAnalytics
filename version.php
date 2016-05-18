@@ -20,12 +20,12 @@
  * Setting the $plugin->version to 0 prevents the plugin from being installed.
  * See https://docs.moodle.org/dev/version.php for more info.
  *
- * @package    moodle_analytics
+ * @package    block_moodlean
  * @copyright  2016 David Miguel de la Fuete <david.mdlf@gmail.com  >
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$plugin->component = 'block_learning_analytics';
+$plugin->component = 'block_moodlean';
 $plugin->version = 2016032300;
 $plugin->release = 'v0.1';
 $plugin->requires = 2014051200;

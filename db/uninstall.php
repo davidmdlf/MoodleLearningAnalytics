@@ -19,14 +19,14 @@
  *
  * @see uninstall_plugin()
  *
- * @package    block_analytics
- * @copyright  2015 Your Name <your@email.adress>
+ * @package    block_moodlean
+ * @copyright  2016 David Miguel de la Fuete <david.mdlf@gmail.com  >
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
  * Custom uninstallation procedure
  */
-function xmldb_analytics_uninstall() {
+function xmldb_block_moodlean_uninstall() {
     return true;
 }

@@ -20,8 +20,8 @@
  * This file replaces the legacy STATEMENTS section in db/install.xml,
  * lib.php/modulename_install() post installation hook and partially defaults.php.
  *
- * @package    block_analytics
- * @copyright  2015 Your Name <your@email.adress>
+ * @package    block_moodlean
+ * @copyright  2016 David Miguel de la Fuete <david.mdlf@gmail.com  >
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@
  *
  * @see upgrade_plugins_modules()
  */
-function xmldb_analytics_install() {
+function xmldb_block_moodlean_install() {
 }
 
 /**
@@ -38,5 +38,5 @@ function xmldb_analytics_install() {
  *
  * @see upgrade_plugins_modules()
  */
-function xmldb_analytics_install_recovery() {
+function xmldb_block_moodlean_install_recovery() {
 }

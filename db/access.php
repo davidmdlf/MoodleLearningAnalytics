@@ -39,8 +39,8 @@
  *
  * The variable name for the capability definitions array is $capabilities
  *
- * @package    block_analytics
- * @copyright  2015 Your Name
+ * @package    block_moodlean
+ * @copyright  2016 David Miguel de la Fuete <david.mdlf@gmail.com  >
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -48,7 +48,7 @@ defined('MOODLE_INTERNAL') || die();
 
 // Modify capabilities as needed and remove this comment.
 $capabilities = array(
-    'block/learning_analytics:addinstance' => array(
+    'block/moodlean:addinstance' => array(
         'riskbitmask' => RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -59,7 +59,7 @@ $capabilities = array(
         'clonepermissionsfrom' => 'moodle/site:manageblocks'
     ),
 
-    'block/learning_analytics:view' => array(
+    'block/moodlean:view' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_MODULE,
         'legacy' => array(
