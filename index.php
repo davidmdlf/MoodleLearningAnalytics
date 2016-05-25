@@ -49,10 +49,10 @@ $PAGE->set_pagelayout('standard');
 
 
 echo $OUTPUT->header();
+echo '<ul>';
 switch ($type) {
     case 'student':
         $students = get_enrolled_users(context_course::instance($courseid));
-        echo '<ul>';
         foreach ($students as $student) {
             $params = array(
                 'type' => $type,
@@ -63,8 +63,16 @@ switch ($type) {
         }
         break;
     case 'group':
-        $groups = groups_get_course_groupmode(context_course::instance($courseid));
-
+        $groups = groups_get_course_data($courseid);
+        foreach ($groups->groups as $group) {
+            $params = array(
+                'type' => $type,
+                $type . '_id' => $group->id,
+                'course_id' => $course->id
+            );
+            echo '<li><a href="analytics.php?' . http_build_query($params, '', '&') . '">' . $group->name . '</a></li>';
+        }
+        break;
 }
 echo '</ul>';
 echo $OUTPUT->footer();
