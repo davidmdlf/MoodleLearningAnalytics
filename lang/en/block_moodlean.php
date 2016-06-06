@@ -39,3 +39,10 @@ $string['student_allowed'] = 'Analytics access for student';
 $string['student_allowed_description'] = 'If enabled, students would be allowed to see learning analytics for course';
 $string['enabled'] = 'Enabled';
 $string['disabled'] = 'Disabled';
+
+
+$string['chart_primary_color'] = 'Chart primary color';
+$string['chart_primary_color_description'] = 'Choose primary color for chart visualization';
+$string['chart_background_opacity'] = 'Chart background opacity';
+$string['chart_line_opacity'] = 'Chart line opacity';
+$string['chart_opacity_description'] = 'Insert value for chart background opacity, a integer between 0 and 100';
