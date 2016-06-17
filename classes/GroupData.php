@@ -14,7 +14,7 @@ class GroupData {
         $query = "SELECT AVG(((grade_grades.finalgrade - grade_items.grademin)/(grade_items.grademax - grade_items.grademin))*10) as grade, grade_items.itemname
         FROM {grade_items} grade_items
         JOIN {grade_grades} grade_grades ON grade_items.id = grade_grades.itemid
-        WHERE grade_items.itemtype = 'mod' AND grade_items.courseid = :course_id AND grade_grades.userid = ANY (
+        WHERE (grade_items.itemtype = 'mod' OR grade_items.itemtype = 'manual')  AND grade_items.courseid = :course_id AND grade_grades.userid = ANY (
         SELECT userid FROM {groups_members} groups_members JOIN {groups} groups ON groups.id = groups_members.groupid WHERE groups.courseid = :courseid AND groups.id = :group_id
         )
         GROUP BY itemname";
@@ -36,7 +36,7 @@ class GroupData {
         $query = "SELECT grade_items.itemmodule, (AVG(grade_grades.finalgrade)/AVG(grade_items.grademax)) as avggraderatio, grade_items.itemname
         FROM {grade_items} grade_items
         JOIN {grade_grades} grade_grades ON grade_items.id = grade_grades.itemid
-        WHERE grade_items.itemtype = 'mod' AND grade_items.courseid = :course_id AND grade_grades.userid = ANY (
+        WHERE (grade_items.itemtype = 'mod' OR grade_items.itemtype = 'manual') AND grade_items.courseid = :course_id AND grade_grades.userid = ANY (
         SELECT userid FROM {groups_members} groups_members JOIN {groups} groups ON groups.id = groups_members.groupid WHERE groups.courseid = :courseid AND groups.id = :group_id
         )
         GROUP BY grade_items.itemmodule";
