@@ -1,5 +1,7 @@
 <?php
 
+require_once('classes/UrlGenerator.php');
+
 class block_moodlean extends block_base
 {
     public function init()
@@ -34,11 +36,11 @@ class block_moodlean extends block_base
             'id' => $COURSE->id,
             'user_id' => $USER->id);
         $params['type'] = 'student';
-        $list = html_writer::tag('p', html_writer::tag('a', html_writer::empty_tag('img', array('src' => $CFG->wwwroot.'/blocks/moodlean/img/student-icon.png', 'alt' => '')) . get_string('see_by_student', 'block_moodlean'), array('href' => $CFG->wwwroot.'/blocks/moodlean/index.php?' . http_build_query($params, '', '&'))));
+        $list = html_writer::tag('p', html_writer::tag('a', html_writer::empty_tag('img', array('src' => $CFG->wwwroot.'/blocks/moodlean/img/student-icon.png', 'alt' => '')) . get_string('see_by_student', 'block_moodlean'), array('href' => UrlGenerator::to_student_selection())));
         $params['type'] = 'group';
-        $list .= html_writer::tag('p', html_writer::tag('a', html_writer::empty_tag('img', array('src' => $CFG->wwwroot.'/blocks/moodlean/img/group-icon.png', 'alt' => '')) . get_string('see_by_group', 'block_moodlean'), array('href' => $CFG->wwwroot.'/blocks/moodlean/index.php?' . http_build_query($params, '', '&'))));
+        $list .= html_writer::tag('p', html_writer::tag('a', html_writer::empty_tag('img', array('src' => $CFG->wwwroot.'/blocks/moodlean/img/group-icon.png', 'alt' => '')) . get_string('see_by_group', 'block_moodlean'), array('href' => UrlGenerator::to_group_selection())));
         $params['type'] = 'class';
-        $list .= html_writer::tag('p', html_writer::tag('a', html_writer::empty_tag('img', array('src' => $CFG->wwwroot.'/blocks/moodlean/img/class-icon.png', 'alt' => '')) . get_string('see_by_class', 'block_moodlean'), array('href' => $CFG->wwwroot.'/blocks/moodlean/index.php?' . http_build_query($params, '', '&'))));
+        $list .= html_writer::tag('p', html_writer::tag('a', html_writer::empty_tag('img', array('src' => $CFG->wwwroot.'/blocks/moodlean/img/class-icon.png', 'alt' => '')) . get_string('see_by_class', 'block_moodlean'), array('href' => UrlGenerator::to_class_analytics())));
 
         $this->content->text .= $list;
         return $this->content;
