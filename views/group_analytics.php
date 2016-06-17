@@ -18,7 +18,7 @@ $PAGE->set_title(get_string('pluginname', "block_moodlean") . " | $course->fulln
 $PAGE->set_heading($course->fullname);
 $PAGE->set_pagelayout('standard');
 
-echo $OUTPUT->header();
+include "templates/fragments/header.php";
 $all_course_grades = GroupData::get_all_course_grades($group->id, $course->id);
 $performance_radar = GroupData::get_performance_radar($group->id, $course->id);
 include "templates/dashboard.php";
