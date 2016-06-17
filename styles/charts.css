@@ -44,7 +44,7 @@
     visibility: visible;
 }
 
-h1 .tooltip .visibletext {
+.tooltip .visibletext {
     font-size: 20px;
     line-height: 28px;
     padding: 2px;
@@ -58,7 +58,13 @@ h1 .tooltip .visibletext {
 }
 
 
+.analyticSection {
+    border-top: 2px solid #ddd;
+    margin-bottom: 50px;
+    padding-top: 10px;
+}
 .radarSection {
+    margin: 15px 0px;
     text-align: center;
 }
 .radarWrapper {
