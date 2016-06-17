@@ -20,8 +20,8 @@ $PAGE->set_title(get_string('pluginname', "block_moodlean") . " | $course->fulln
 $PAGE->set_heading($course->fullname);
 $PAGE->set_pagelayout('standard');
 
-echo $OUTPUT->header();
+include "templates/fragments/header.php";
 $all_course_grades = UserData::get_all_course_grades($student->id, $course->id);
 $performance_radar = UserData::get_performance_radar($student->id, $course->id);
-include "templates/student_dashboard.php";
+include "templates/dashboard.php";
 echo $OUTPUT->footer();

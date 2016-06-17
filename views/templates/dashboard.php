@@ -3,38 +3,43 @@
 <script src="js/utils.js"></script>
 <?php $la_config = get_config('block_moodlean'); ?>
 
-<h1>
-    <?php echo get_string('performance_radar_title', "block_moodlean") ?>
-    <div class="tooltip">
-        <span class="visibletext">?</span>
-        <span class="tooltiptext"><?php echo get_string('performance_radar_help', "block_moodlean") ?></span>
-    </div>
-</h1>
-<section class="radarSection">
-    <div class="radarWrapper">
-        <canvas id="performance_radar_chart" height="500" width="500"></canvas>
-    </div>
+<section class="analyticsection">
+    <h4>
+        <?php echo get_string('performance_radar_title', "block_moodlean") ?>
+        <div class="tooltip">
+            <span class="visibletext">?</span>
+            <span class="tooltiptext"><?php echo get_string('performance_radar_help', "block_moodlean") ?></span>
+        </div>
+    </h4>
+    <section class="radarSection">
+        <div class="radarWrapper">
+            <canvas id="performance_radar_chart" height="500" width="500"></canvas>
+        </div>
+    </section>
 </section>
 
-
-<h1>
-    <?php echo get_string('grades_timeline_title', "block_moodlean") ?>
-    <div class="tooltip">
-        <span class="visibletext">?</span>
-        <span class="tooltiptext"><?php echo get_string('grades_timeline_help', "block_moodlean") ?></span>
-    </div>
-</h1>
-<?php
-$width = sizeof($all_course_grades['labels']) * 100;
-$width = $width > 500 ? $width : 500;
-?>
-<div class="chartWrapper">
-    <div class="scrollChartContainer" style="width: 100%">
-        <div class="chartAreaWrapper" style="width: <?php echo $width ?>px">
-            <canvas id="gradesTimeline" height="600" width="<?php echo $width ?>"></canvas>
+<section class="analyticsection">
+    <h4>
+        <?php echo get_string('grades_timeline_title', "block_moodlean") ?>
+        <div class="tooltip">
+            <span class="visibletext">?</span>
+            <span class="tooltiptext"><?php echo get_string('grades_timeline_help', "block_moodlean") ?></span>
         </div>
-    </div>
-</div>
+    </h4>
+    <section class="radarSection">
+        <?php
+        $width = sizeof($all_course_grades['labels']) * 100;
+        $width = $width > 500 ? $width : 500;
+        ?>
+        <div class="chartWrapper">
+            <div class="scrollChartContainer" style="width: 100%">
+                <div class="chartAreaWrapper" style="width: <?php echo $width ?>px">
+                    <canvas id="gradesTimeline" height="600" width="<?php echo $width ?>"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
 
 
 <script>
