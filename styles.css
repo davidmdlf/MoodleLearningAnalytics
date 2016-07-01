@@ -1,0 +1,14 @@
+.block_moodlean.block .main_rotule {
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+.block_moodlean.block * {
+    vertical-align: middle;
+}
+.block_moodlean.block p {
+    margin: .5rem 0rem;
+}
+.block_moodlean.block img {
+    margin-right: .5rem;
+    opacity: 50;
+}

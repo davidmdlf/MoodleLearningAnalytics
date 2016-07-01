@@ -29,8 +29,10 @@ class block_moodlean extends block_base
         }
 
         $course = $DB->get_record('course', array('id' => $COURSE->id));
-        $this->content->text = html_writer::empty_tag('img', array('src' => $CFG->wwwroot.'/blocks/moodlean/pix/icon.png', 'alt' => ''));
+        $this->content->text = html_writer::start_tag('div', array('class' => 'main_rotule'));
+        $this->content->text .= html_writer::empty_tag('img', array('src' => $CFG->wwwroot.'/blocks/moodlean/pix/icon.png', 'alt' => ''));
         $this->content->text .= html_writer::tag('span', get_string('see_analytics_for', 'block_moodlean')) . $course->fullname;
+        $this->content->text .= html_writer::end_tag('div');
 
         $params = array(
             'id' => $COURSE->id,
