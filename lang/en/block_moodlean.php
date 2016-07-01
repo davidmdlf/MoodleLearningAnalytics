@@ -35,6 +35,8 @@ $string['see_by_student'] = 'Analytics by student';
 $string['see_by_group'] = 'Analytics by group';
 $string['see_by_class'] = 'Analytics for full class';
 
+$string['analytics_for'] = 'Analytics for %';
+
 $string['student_allowed'] = 'Analytics access for student';
 $string['student_allowed_description'] = 'If enabled, students would be allowed to see learning analytics for course';
 $string['enabled'] = 'Enabled';

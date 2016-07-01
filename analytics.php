@@ -24,4 +24,6 @@ switch($type){
         include 'views/student_analytics.php'; break;
     case 'group':
         include 'views/group_analytics.php'; break;
+    case 'class':
+        include 'views/class_analytics.php'; break;
 }

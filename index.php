@@ -23,10 +23,11 @@
  */
 
 require_once '../../config.php';
+require_once 'classes/UrlGenerator.php';
 
-$courseid = required_param('id', PARAM_INT);
+$courseid = required_param('course_id', PARAM_INT);
 
-$PAGE->set_url('/moodlean/index.php', array('id' => $courseid));
+$PAGE->set_url('/moodlean/index.php', array('course_id' => $courseid));
 
 /// basic access checks
 if (!$course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST)) {
@@ -54,23 +55,13 @@ switch ($type) {
     case 'student':
         $students = get_enrolled_users(context_course::instance($courseid));
         foreach ($students as $student) {
-            $params = array(
-                'type' => $type,
-                $type . '_id' => $student->id,
-                'course_id' => $course->id
-            );
-            echo '<li><a href="analytics.php?' . http_build_query($params, '', '&') . '">' . $student->firstname . ' ' . $student->lastname . '</a></li>';
+            echo '<li><a href="' . UrlGenerator::to_student_analytics($student->id) . '">' . $student->firstname . ' ' . $student->lastname . '</a></li>';
         }
         break;
     case 'group':
         $groups = groups_get_course_data($courseid);
         foreach ($groups->groups as $group) {
-            $params = array(
-                'type' => $type,
-                $type . '_id' => $group->id,
-                'course_id' => $course->id
-            );
-            echo '<li><a href="analytics.php?' . http_build_query($params, '', '&') . '">' . $group->name . '</a></li>';
+            echo '<li><a href="'. UrlGenerator::to_group_analytics($group->id) .'">' . $group->name . '</a></li>';
         }
         break;
 }
