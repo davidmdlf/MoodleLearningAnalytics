@@ -19,6 +19,16 @@ $PAGE->set_heading($course->fullname);
 $PAGE->set_pagelayout('standard');
 
 include "templates/fragments/header.php";
+$students_of_group = get_enrolled_users(context_course::instance($course->id), '', $group->id, 'u.id, u.firstname, u.lastname', 'u.firstname');
+echo html_writer::tag('h5', get_string('group_formed_by', "block_moodlean"));
+echo html_writer::start_tag('ul', array('class' => 'students_of_group_list'));
+foreach($students_of_group as $student) {
+    $student_link = html_writer::start_tag('li', array('class' => 'student_of_group'));
+    $student_link .= html_writer::tag('a', $student->firstname . ' ' . $student->lastname, array('href' => UrlGenerator::to_student_analytics($student->id )));
+    $student_link .= html_writer::end_tag('li');
+    echo $student_link;
+}
+echo html_writer::end_tag('ul');
 $all_course_grades = GroupData::get_all_course_grades($group->id, $course->id);
 $performance_radar = GroupData::get_performance_radar($group->id, $course->id);
 include "templates/dashboard.php";

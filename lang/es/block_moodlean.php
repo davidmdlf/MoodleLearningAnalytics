@@ -50,8 +50,10 @@ $string['chart_line_opacity'] = 'Transparencia de trazo de gráfica';
 $string['chart_opacity_description'] = 'Introduce un valor para la transparencia, ha de ser un entero entre 0 y 100';
 
 
-$string['performance_radar_title'] = 'Kiviatt de desempeño por tipo de actividad';
+$string['performance_radar_title'] = 'Kiviat de desempeño por tipo de actividad';
 $string['performance_radar_help'] = 'Este gráfico muestra el ratio medio del desempeño por los diferentes tipos de actividades del curso. Permite comparar el desempeño entre los distintos tipos.';
 
 $string['grades_timeline_title'] = 'Cronología de calificaciones';
 $string['grades_timeline_help'] = 'Este gráfico muestra el resultado normalizado para cada actividad del curso ordenado de manera cronológica. Permite visualizar si el desempeño ha sido constante a lo largo del desarrollo del curso.';
+
+$string['group_formed_by'] = "El grupo está formado por...";

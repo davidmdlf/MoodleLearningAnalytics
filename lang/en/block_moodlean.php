@@ -55,3 +55,5 @@ $string['performance_radar_help'] = 'This radar shows the average ratio of perfo
 
 $string['grades_timeline_title'] = 'Grades timeline';
 $string['grades_timeline_help'] = 'This chart shows normalized result for each item in course order in timeline. It allowed to watch if the student results have been at same level during the course development.';
+
+$string['group_formed_by'] = "Group is formed by...";

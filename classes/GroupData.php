@@ -11,7 +11,7 @@ class GroupData {
 
     static function get_all_course_grades($group_id, $course_id){
         global $DB;
-        $query = "SELECT AVG(((grade_grades.finalgrade - grade_items.grademin)/(grade_items.grademax - grade_items.grademin))*10) as grade, grade_items.itemname
+        $query = "SELECT grade_grades.id, AVG(((grade_grades.finalgrade - grade_items.grademin)/(grade_items.grademax - grade_items.grademin))*10) as grade, grade_items.itemname
         FROM {grade_items} grade_items
         JOIN {grade_grades} grade_grades ON grade_items.id = grade_grades.itemid
         WHERE (grade_items.itemtype = 'mod' OR grade_items.itemtype = 'manual')  AND grade_items.courseid = :course_id AND grade_grades.userid = ANY (
