@@ -11,3 +11,29 @@
 .block_moodlean.block img {
     margin-right: .5rem;
 }
+
+section.tabs-section {
+    border: solid 1px rgba(0,0,0,0.25);
+    border-top: none;
+    padding: 2rem;
+    border-radius: 0px 0px 4px 4px;
+}
+[class^="tab-"]{
+    box-sizing: border-box;
+    display:inline-block;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border: solid 1px rgba(0,0,0,0.25);
+    background-color: rgba(0,0,0,0.05);
+    color: rgba(0,0,0,0.25);
+    border-radius: 10px 10px 0px 0px;
+}
+[class^="tab-"].selected {
+    background-color: white;
+    color: rgba(0,0,0,0.85);
+    border-bottom: none;
+}
+.tab-50 {
+    width: 50%;
+}

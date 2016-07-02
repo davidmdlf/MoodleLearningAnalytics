@@ -57,3 +57,5 @@ $string['grades_timeline_title'] = 'Cronología de calificaciones';
 $string['grades_timeline_help'] = 'Este gráfico muestra el resultado normalizado para cada actividad del curso ordenado de manera cronológica. Permite visualizar si el desempeño ha sido constante a lo largo del desarrollo del curso.';
 
 $string['group_formed_by'] = "El grupo está formado por...";
+
+$string['compare'] = "Comparar analíticas";

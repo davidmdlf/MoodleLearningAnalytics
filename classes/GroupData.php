@@ -26,7 +26,7 @@ class GroupData {
             $grades[] = $record->grade;
         }
         return array(
-            'grades' => $grades,
+            'values' => $grades,
             'labels' => $labels
         );
     }
@@ -48,7 +48,7 @@ class GroupData {
             $ratios[] = $record->avggraderatio;
         }
         return array(
-            'ratios' => $ratios,
+            'values' => $ratios,
             'labels' => $labels
         );
     }

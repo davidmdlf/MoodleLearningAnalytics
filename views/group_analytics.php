@@ -18,7 +18,7 @@ $PAGE->set_title(get_string('pluginname', "block_moodlean") . " | $course->fulln
 $PAGE->set_heading($course->fullname);
 $PAGE->set_pagelayout('standard');
 
-include "templates/fragments/header.php";
+$is_comparation ? include "templates/fragments/comparator_header.php" : include "templates/fragments/header.php";
 $students_of_group = get_enrolled_users(context_course::instance($course->id), '', $group->id, 'u.id, u.firstname, u.lastname', 'u.firstname');
 echo html_writer::tag('h5', get_string('group_formed_by', "block_moodlean"));
 echo html_writer::start_tag('ul', array('class' => 'students_of_group_list'));

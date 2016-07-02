@@ -48,22 +48,66 @@ $PAGE->set_title(get_string('pluginname', "block_moodlean") . " | $course->fulln
 $PAGE->set_heading($course->fullname);
 $PAGE->set_pagelayout('standard');
 
+$is_comparator_selection = false;
+if(isset($_GET['is_comparator'])){
+    $is_comparator_selection = true;
+}
 
 echo $OUTPUT->header();
-echo '<ul>';
+
+echo '<div class="tab-50'.($is_comparator_selection?'':' selected').'">';
+echo '<a href="'.UrlGenerator::to_student_selection().'">'.get_string("see_by_student", "block_moodlean").'</a>';
+echo '</div>';
+
+echo '<div class="tab-50'.($is_comparator_selection?' selected':'').'">';
+echo '<a href="'.UrlGenerator::to_student_comparation_selection().'">'.get_string("compare", "block_moodlean").'</a>';
+echo '</div>';echo '<section class="tabs-section">';
+
+echo '<ul class="analytics_single_selector">';
 switch ($type) {
     case 'student':
-        $students = get_enrolled_users(context_course::instance($courseid));
-        foreach ($students as $student) {
-            echo '<li><a href="' . UrlGenerator::to_student_analytics($student->id) . '">' . $student->firstname . ' ' . $student->lastname . '</a></li>';
-        }
+        $students = get_enrolled_users(context_course::instance($course->id), '', '', 'u.id, u.firstname, u.lastname', 'u.firstname');
         break;
     case 'group':
         $groups = groups_get_course_data($courseid);
-        foreach ($groups->groups as $group) {
-            echo '<li><a href="'. UrlGenerator::to_group_analytics($group->id) .'">' . $group->name . '</a></li>';
-        }
         break;
 }
-echo '</ul>';
+
+if(!$is_comparator_selection) {
+    switch ($type) {
+        case 'student':
+            foreach ($students as $student) {
+                echo '<li><a href="' . UrlGenerator::to_student_analytics($student->id) . '">' . $student->firstname . ' ' . $student->lastname . '</a></li>';
+            }
+            break;
+        case 'group':
+            foreach ($groups->groups as $group) {
+                echo '<li><a href="' . UrlGenerator::to_group_analytics($group->id) . '">' . $group->name . '</a></li>';
+            }
+            break;
+    }
+    echo '</ul>';
+}
+if($is_comparator_selection) {
+    echo '<form class="analytics_multiple_selector" method="post" action="analytics.php">';
+    switch ($type) {
+        case 'student':
+            foreach ($students as $student) {
+                echo '<div><input type="checkbox" name="student_ids['.$student->id.']" value="' . $student->id . '">' . $student->firstname . ' ' . $student->lastname . '</input></div>';
+            }
+            break;
+        case 'group':
+            foreach ($groups->groups as $group) {
+                echo '<div><input type="checkbox" name="group_id['.$group->id.']"  value="' . $group->id . '">' . $group->name . '</input></div>';
+            }
+            break;
+    }
+    echo '<div><input type="hidden" name="course_id" value="' . $courseid. '">';
+    echo '<div><input type="hidden" name="type" value="' . $type. '">';
+    echo '<div><input type="submit" value="' . get_string("compare", "block_moodlean") . '">';
+    echo '</form>';
+}
+echo '</section>';
 echo $OUTPUT->footer();
+
+?>
