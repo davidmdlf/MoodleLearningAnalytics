@@ -23,10 +23,11 @@ class ClassData {
         $labels = array();
         foreach($records as $record){
             $labels[] = "'".$record->itemname."'";
-            $grades[] = $record->grade;
+            $grades[] = round($record->grade, 2);
         }
         return array(
-            'grades' => $grades,
+            'label' => get_string('full_class', 'block_moodlean'),
+            'values' => $grades,
             'labels' => $labels
         );
     }
@@ -43,11 +44,12 @@ class ClassData {
         $ratios = array();
         $labels = array();
         foreach($records as $record){
-            $labels[] = "'".$record->itemmodule."'";
-            $ratios[] = $record->avggraderatio;
+            $labels[] = $record->itemmodule != "manual" && !empty($record->itemmodule) ? "'".get_string('modulename', "mod_".$record->itemmodule)."'" : "'".get_string('manual_grade', "block_moodlean")."'" ;
+            $ratios[] = round($record->avggraderatio, 2);
         }
         return array(
-            'ratios' => $ratios,
+            'label' => get_string('full_class', 'block_moodlean'),
+            'values' => $ratios,
             'labels' => $labels
         );
     }

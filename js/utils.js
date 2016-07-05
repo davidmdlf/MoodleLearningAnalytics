@@ -12,3 +12,4 @@ function convertHex(hex,opacity){
     result = 'rgba('+r+','+g+','+b+','+opacity/100+')';
     return result;
 }
+

@@ -43,8 +43,8 @@ $string['enabled'] = 'Enabled';
 $string['disabled'] = 'Disabled';
 
 
-$string['chart_primary_color'] = 'Chart primary color';
-$string['chart_primary_color_description'] = 'Choose primary color for chart visualization';
+$string['chart_color'] = 'Chart color #{$a}';
+$string['chart_color_description'] = 'Choose color #{$a} for chart visualization';
 $string['chart_background_opacity'] = 'Chart background opacity';
 $string['chart_line_opacity'] = 'Chart line opacity';
 $string['chart_opacity_description'] = 'Insert value for chart background opacity, a integer between 0 and 100';
@@ -55,3 +55,11 @@ $string['performance_radar_help'] = 'This radar shows the average ratio of perfo
 
 $string['grades_timeline_title'] = 'Grades timeline';
 $string['grades_timeline_help'] = 'This chart shows normalized result for each item in course order in timeline. It allowed to watch if the student results have been at same level during the course development.';
+
+$string['group_formed_by'] = "Group is formed by...";
+
+$string['compare'] = "Compare analytics";
+$string['no_more_selections_allowed'] = "You have reached the maximum number of selections.\\nPlease, deselect some of them before selecting a new one.";
+
+$string['manual_grade'] = "Manual grade (activities out from Moodle)";
+$string['full_class'] = "Full class";

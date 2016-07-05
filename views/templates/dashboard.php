@@ -1,3 +1,4 @@
+<script src="js/jquery.3.0.min.js"></script>
 <link rel="stylesheet" type="text/css" href="styles/charts.css">
 <script src="js/Chart.js"></script>
 <script src="js/utils.js"></script>
@@ -28,7 +29,7 @@
     </h4>
     <section class="radarSection">
         <?php
-        $width = sizeof($all_course_grades['labels']) * 100;
+        $width = sizeof($all_course_grades[0]['labels']) * 100;
         $width = $width > 500 ? $width : 500;
         ?>
         <div class="chartWrapper">
@@ -41,18 +42,29 @@
     </section>
 </section>
 
-
+<?php $datasets_num = sizeof($all_course_grades); ?>
 <script>
     var ctx = document.getElementById("gradesTimeline").getContext("2d");
 
     var data = {
-        labels: [<?php echo implode(", ", $all_course_grades['labels']); ?>],
-        datasets: [{
-            data: [<?php echo implode(", ", $all_course_grades['grades']); ?>],
-            backgroundColor: convertHex(<?php echo "'".$la_config->chart_primary_color."', ".$la_config->chart_background_opacity; ?>),
-            borderColor: convertHex(<?php echo "'".$la_config->chart_primary_color."', ".$la_config->chart_line_opacity; ?>),
-            borderWidth: 1
-        }]
+        labels: [<?php echo implode(", ", $all_course_grades[0]['labels']); ?>],
+        datasets: [
+            <?php $i = 1; foreach($all_course_grades as $course_grades) { ?>
+            {
+                <?php $color = 'chart_color_'.$i; ?>
+                label: "<?php echo $course_grades['label']; ?>",
+                data: [<?php echo implode(", ", $course_grades['values']); ?>],
+                backgroundColor: convertHex(<?php echo "'".$la_config->$color."', ".$la_config->chart_background_opacity ; ?>),
+                borderColor: convertHex(<?php echo "'".$la_config->$color."', ".$la_config->chart_line_opacity; ?>),
+                borderWidth: 1
+            }
+            <?php ++$i;
+            if($i <= $datasets_num){
+            echo ",";
+            }
+            ?>
+            <?php } ?>
+        ]
     };
 
     new Chart(ctx, {
@@ -69,7 +81,7 @@
                 }]
             },
             legend: {
-                display: false
+                display: true
             }
         }
     });
@@ -78,13 +90,24 @@
     var ctx = document.getElementById("performance_radar_chart");
 
     var data = {
-        labels: [<?php echo implode(", ", $performance_radar['labels']); ?>],
-        datasets: [{
-            data: [<?php echo implode(", ", $performance_radar['ratios']); ?>],
-            backgroundColor: convertHex(<?php echo "'".$la_config->chart_primary_color."', ".$la_config->chart_background_opacity; ?>),
-            borderColor: convertHex(<?php echo "'".$la_config->chart_primary_color."', ".$la_config->chart_line_opacity; ?>),
-            borderWidth: 1
-        }]
+        labels: [<?php echo implode(", ", $performance_radar[0]['labels']); ?>],
+        datasets: [
+            <?php $i = 1; foreach($performance_radar as $course_grades) { ?>
+            {
+                <?php $color = 'chart_color_'.$i; ?>
+                label: "<?php echo $course_grades['label']; ?>",
+                data: [<?php echo implode(", ", $course_grades['values']); ?>],
+                backgroundColor: convertHex(<?php echo "'".$la_config->$color."', ".$la_config->chart_background_opacity ; ?>),
+                borderColor: convertHex(<?php echo "'".$la_config->$color."', ".$la_config->chart_line_opacity; ?>),
+                borderWidth: 1
+            }
+            <?php ++$i;
+            if($i <= $datasets_num){
+            echo ",";
+            }
+            ?>
+            <?php } ?>
+        ]
     };
 
     var options = {
@@ -94,12 +117,12 @@
                 max: 1,
                 maxTicksLimit: 5,
                 callback: function (value) {
-                    return ('' + value).substr(0, 3);
+                    return ((Math.round(value * 100))/100);
                 }
             }
         },
         legend: {
-            display: false
+            display: true
         }
     };
 

@@ -17,8 +17,8 @@ $PAGE->set_title(get_string('pluginname', "block_moodlean") . " | $course->fulln
 $PAGE->set_heading($course->fullname);
 $PAGE->set_pagelayout('standard');
 
-include "templates/fragments/header.php";
-$all_course_grades = ClassData::get_all_course_grades($course->id);
-$performance_radar = ClassData::get_performance_radar($course->id);
+$is_comparation ? include "templates/fragments/comparator_header.php" : include "templates/fragments/header.php";
+$all_course_grades = array(ClassData::get_all_course_grades($course->id));
+$performance_radar = array(ClassData::get_performance_radar($course->id));
 include "templates/dashboard.php";
 echo $OUTPUT->footer();

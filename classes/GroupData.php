@@ -8,10 +8,17 @@ require_once($CFG->libdir.'/gradelib.php');
 require_once($CFG->dirroot .'/grade/querylib.php');
 
 class GroupData {
+    static function get_all_course_grades_for_multiple_groups($group_ids, $course_id) {
+        $grade_sets = [];
+        foreach($group_ids as $user_id){
+            $grade_sets[] = GroupData::get_all_course_grades($user_id, $course_id);
+        }
+        return $grade_sets;
+    }
 
     static function get_all_course_grades($group_id, $course_id){
         global $DB;
-        $query = "SELECT AVG(((grade_grades.finalgrade - grade_items.grademin)/(grade_items.grademax - grade_items.grademin))*10) as grade, grade_items.itemname
+        $query = "SELECT grade_grades.id, AVG(((grade_grades.finalgrade - grade_items.grademin)/(grade_items.grademax - grade_items.grademin))*10) as grade, grade_items.itemname
         FROM {grade_items} grade_items
         JOIN {grade_grades} grade_grades ON grade_items.id = grade_grades.itemid
         WHERE (grade_items.itemtype = 'mod' OR grade_items.itemtype = 'manual')  AND grade_items.courseid = :course_id AND grade_grades.userid = ANY (
@@ -23,14 +30,23 @@ class GroupData {
         $labels = array();
         foreach($records as $record){
             $labels[] = "'".$record->itemname."'";
-            $grades[] = $record->grade;
+            $grades[] = round($record->grade, 2);
         }
+        $group = $DB->get_record('groups', array('id' => $group_id));
         return array(
-            'grades' => $grades,
+            'label' => $group->name,
+            'values' => $grades,
             'labels' => $labels
         );
     }
 
+    static function get_performance_radar_for_multiple_groups($group_ids, $course_id) {
+        $grade_sets = [];
+        foreach($group_ids as $user_id){
+            $grade_sets[] = GroupData::get_performance_radar($user_id, $course_id);
+        }
+        return $grade_sets;
+    }
     static function get_performance_radar($group_id, $course_id){
         global $DB;
         $query = "SELECT grade_items.itemmodule, (AVG(grade_grades.finalgrade)/AVG(grade_items.grademax)) as avggraderatio, grade_items.itemname
@@ -44,11 +60,13 @@ class GroupData {
         $ratios = array();
         $labels = array();
         foreach($records as $record){
-            $labels[] = "'".$record->itemmodule."'";
-            $ratios[] = $record->avggraderatio;
+            $labels[] = $record->itemmodule != "manual" && !empty($record->itemmodule) ? "'".get_string('modulename', "mod_".$record->itemmodule)."'" : "'".get_string('manual_grade', "block_moodlean")."'" ;
+            $ratios[] = round($record->avggraderatio, 2);
         }
+        $group = $DB->get_record('groups', array('id' => $group_id));
         return array(
-            'ratios' => $ratios,
+            'label' => $group->name,
+            'values' => $ratios,
             'labels' => $labels
         );
     }

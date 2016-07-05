@@ -10,9 +10,18 @@ require_once($CFG->dirroot.'/rating/lib.php');
 
 
 /// basic access checks
-if (!$course = $DB->get_record('course', array('id' => $_GET['course_id']), '*', MUST_EXIST)) {
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $is_comparation = true;
+    $course_id = $_POST['course_id'];
+    $type = $_POST['type'];
+} else {
+    $is_comparation = false;
+    $course_id = $_GET['course_id'];
+    $type = $_GET['type'];
+}
+if (!$course = $DB->get_record('course', array('id' => $course_id), '*', MUST_EXIST)) {
     print_error('nocourseid');
-}if (!$type = $_GET['type']) {
+}if (!$type) {
     print_error('notype');
 }
 
