@@ -51,10 +51,11 @@
         datasets: [
             <?php $i = 1; foreach($all_course_grades as $course_grades) { ?>
             {
+                <?php $color = 'chart_color_'.$i; ?>
                 label: "<?php echo $course_grades['label']; ?>",
                 data: [<?php echo implode(", ", $course_grades['values']); ?>],
-                backgroundColor: convertHex(<?php echo "'".$la_config->chart_primary_color."', ".$la_config->chart_background_opacity/$i ; ?>),
-                borderColor: convertHex(<?php echo "'".$la_config->chart_primary_color."', ".$la_config->chart_line_opacity/$i; ?>),
+                backgroundColor: convertHex(<?php echo "'".$la_config->$color."', ".$la_config->chart_background_opacity ; ?>),
+                borderColor: convertHex(<?php echo "'".$la_config->$color."', ".$la_config->chart_line_opacity; ?>),
                 borderWidth: 1
             }
             <?php ++$i;
@@ -93,10 +94,11 @@
         datasets: [
             <?php $i = 1; foreach($performance_radar as $course_grades) { ?>
             {
+                <?php $color = 'chart_color_'.$i; ?>
                 label: "<?php echo $course_grades['label']; ?>",
                 data: [<?php echo implode(", ", $course_grades['values']); ?>],
-                backgroundColor: convertHex(<?php echo "'".$la_config->chart_primary_color."', ".$la_config->chart_background_opacity/$i ; ?>),
-                borderColor: convertHex(<?php echo "'".$la_config->chart_primary_color."', ".$la_config->chart_line_opacity/$i; ?>),
+                backgroundColor: convertHex(<?php echo "'".$la_config->$color."', ".$la_config->chart_background_opacity ; ?>),
+                borderColor: convertHex(<?php echo "'".$la_config->$color."', ".$la_config->chart_line_opacity; ?>),
                 borderWidth: 1
             }
             <?php ++$i;
