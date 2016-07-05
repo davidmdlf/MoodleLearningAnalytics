@@ -1,3 +1,4 @@
+<script src="js/jquery.3.0.min.js"></script>
 <link rel="stylesheet" type="text/css" href="styles/charts.css">
 <script src="js/Chart.js"></script>
 <script src="js/utils.js"></script>
@@ -50,6 +51,7 @@
         datasets: [
             <?php $i = 1; foreach($all_course_grades as $course_grades) { ?>
             {
+                label: "<?php echo $course_grades['label']; ?>",
                 data: [<?php echo implode(", ", $course_grades['values']); ?>],
                 backgroundColor: convertHex(<?php echo "'".$la_config->chart_primary_color."', ".$la_config->chart_background_opacity/$i ; ?>),
                 borderColor: convertHex(<?php echo "'".$la_config->chart_primary_color."', ".$la_config->chart_line_opacity/$i; ?>),
@@ -78,7 +80,7 @@
                 }]
             },
             legend: {
-                display: false
+                display: true
             }
         }
     });
@@ -91,6 +93,7 @@
         datasets: [
             <?php $i = 1; foreach($performance_radar as $course_grades) { ?>
             {
+                label: "<?php echo $course_grades['label']; ?>",
                 data: [<?php echo implode(", ", $course_grades['values']); ?>],
                 backgroundColor: convertHex(<?php echo "'".$la_config->chart_primary_color."', ".$la_config->chart_background_opacity/$i ; ?>),
                 borderColor: convertHex(<?php echo "'".$la_config->chart_primary_color."', ".$la_config->chart_line_opacity/$i; ?>),
@@ -117,7 +120,7 @@
             }
         },
         legend: {
-            display: false
+            display: true
         }
     };
 

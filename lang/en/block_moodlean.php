@@ -59,3 +59,6 @@ $string['grades_timeline_help'] = 'This chart shows normalized result for each i
 $string['group_formed_by'] = "Group is formed by...";
 
 $string['compare'] = "Compare analytics";
+$string['no_more_selections_allowed'] = "You have reached the maximum number of selections.\\nPlease, deselect some of them before selecting a new one.";
+
+$string['manual_grade'] = "Manual grade (activities out from Moodle)";

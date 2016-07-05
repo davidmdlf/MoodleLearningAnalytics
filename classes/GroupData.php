@@ -32,7 +32,9 @@ class GroupData {
             $labels[] = "'".$record->itemname."'";
             $grades[] = $record->grade;
         }
+        $group = $DB->get_record('groups', array('id' => $group_id));
         return array(
+            'label' => $group->name,
             'values' => $grades,
             'labels' => $labels
         );
@@ -58,10 +60,13 @@ class GroupData {
         $ratios = array();
         $labels = array();
         foreach($records as $record){
-            $labels[] = "'".$record->itemmodule."'";
+            echo  $record->itemmodule."<br>";
+            $labels[] = $record->itemmodule != "manual" && !empty($record->itemmodule) ? "'".get_string('modulename', "mod_".$record->itemmodule)."'" : "'".get_string('manual_grade', "block_moodlean")."'" ;
             $ratios[] = $record->avggraderatio;
         }
+        $group = $DB->get_record('groups', array('id' => $group_id));
         return array(
+            'label' => $group->name,
             'values' => $ratios,
             'labels' => $labels
         );

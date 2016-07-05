@@ -26,7 +26,9 @@ class UserData {
             $labels[] = "'".$record->itemname."'";
             $grades[] = $record->grade;
         }
+        $student = $DB->get_record('user', array("id" => $user_id));
         return array(
+            'label' => $student->firstname . " " . $student->lastname,
             'values' => $grades,
             'labels' => $labels
         );
@@ -46,10 +48,12 @@ class UserData {
         $ratios = array();
         $labels = array();
         foreach($records as $record){
-            $labels[] = "'".$record->itemmodule."'";
+            $labels[] = $record->itemmodule != "manual" && !empty($record->itemmodule) ? "'".get_string('modulename', "mod_".$record->itemmodule)."'" : "'".get_string('manual_grade', "block_moodlean")."'" ;
             $ratios[] = $record->avggraderatio;
         }
+        $student = $DB->get_record('user', array("id" => $user_id));
         return array(
+            'label' => $student->firstname . " " . $student->lastname,
             'values' => $ratios,
             'labels' => $labels
         );

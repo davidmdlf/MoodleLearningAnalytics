@@ -59,3 +59,6 @@ $string['grades_timeline_help'] = 'Este gráfico muestra el resultado normalizad
 $string['group_formed_by'] = "El grupo está formado por...";
 
 $string['compare'] = "Comparar analíticas";
+$string['no_more_selections_allowed'] = "Has alcanzado el máximo de selecciones posible.\\nPor favor, deselecciona alguno de los seleccionados antes de seleccionar otro.";
+
+$string['manual_grade'] = "Calificación manual (actividades fuera de Moodle)";

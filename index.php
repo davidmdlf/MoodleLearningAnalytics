@@ -1,3 +1,4 @@
+<script src="js/jquery.3.0.min.js"></script>
 <?php
 // This file is part of Moodle - http://moodle.org/
 //
@@ -104,12 +105,12 @@ if($is_comparator_selection) {
     switch ($type) {
         case 'student':
             foreach ($students as $student) {
-                echo '<div><input type="checkbox" name="student_ids['.$student->id.']" value="' . $student->id . '">' . $student->firstname . ' ' . $student->lastname . '</input></div>';
+                echo '<div><input class="analytics_entity_checkbox" type="checkbox" name="student_ids['.$student->id.']" value="' . $student->id . '">' . $student->firstname . ' ' . $student->lastname . '</input></div>';
             }
             break;
         case 'group':
             foreach ($groups->groups as $group) {
-                echo '<div><input type="checkbox" name="group_ids['.$group->id.']"  value="' . $group->id . '">' . $group->name . '</input></div>';
+                echo '<div><input class="analytics_entity_checkbox" type="checkbox" name="group_ids['.$group->id.']"  value="' . $group->id . '">' . $group->name . '</input></div>';
             }
             break;
     }
@@ -122,3 +123,14 @@ echo '</section>';
 echo $OUTPUT->footer();
 
 ?>
+<script>
+    $(function(){
+        $('.analytics_entity_checkbox').change(function(){
+            console.log('changing');
+            if($('.analytics_entity_checkbox:checked').length > 5){
+                alert('<?php echo get_string('no_more_selections_allowed', 'block_moodlean'); ?>');
+                $(this).prop('checked', false)
+            }
+        });
+    })
+</script>
