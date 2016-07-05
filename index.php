@@ -55,13 +55,24 @@ if(isset($_GET['is_comparator'])){
 
 echo $OUTPUT->header();
 
-echo '<div class="tab-50'.($is_comparator_selection?'':' selected').'">';
-echo '<a href="'.UrlGenerator::to_student_selection().'">'.get_string("see_by_student", "block_moodlean").'</a>';
-echo '</div>';
+switch ($type) {
+    case 'student':
+        echo '<div class="tab-50'.($is_comparator_selection?'':' selected').'">';
+        echo '<a href="'.UrlGenerator::to_student_selection().'">'.get_string("see_by_student", "block_moodlean").'</a>';
+        echo '</div>';
+        echo '<div class="tab-50'.($is_comparator_selection?' selected':'').'">';
+        echo '<a href="'.UrlGenerator::to_student_comparation_selection().'">'.get_string("compare", "block_moodlean").'</a>';
+        echo '</div>';echo '<section class="tabs-section">';
+        break;
+    case 'group':
+        echo '<div class="tab-50'.($is_comparator_selection?'':' selected').'">';
+        echo '<a href="'.UrlGenerator::to_group_selection().'">'.get_string("see_by_group", "block_moodlean").'</a>';
+        echo '</div>';
+        echo '<div class="tab-50'.($is_comparator_selection?' selected':'').'">';
+        echo '<a href="'.UrlGenerator::to_group_comparation_selection().'">'.get_string("compare", "block_moodlean").'</a>';
+        echo '</div>';echo '<section class="tabs-section">';        break;
+}
 
-echo '<div class="tab-50'.($is_comparator_selection?' selected':'').'">';
-echo '<a href="'.UrlGenerator::to_student_comparation_selection().'">'.get_string("compare", "block_moodlean").'</a>';
-echo '</div>';echo '<section class="tabs-section">';
 
 echo '<ul class="analytics_single_selector">';
 switch ($type) {
@@ -98,7 +109,7 @@ if($is_comparator_selection) {
             break;
         case 'group':
             foreach ($groups->groups as $group) {
-                echo '<div><input type="checkbox" name="group_id['.$group->id.']"  value="' . $group->id . '">' . $group->name . '</input></div>';
+                echo '<div><input type="checkbox" name="group_ids['.$group->id.']"  value="' . $group->id . '">' . $group->name . '</input></div>';
             }
             break;
     }

@@ -8,6 +8,13 @@ require_once($CFG->libdir.'/gradelib.php');
 require_once($CFG->dirroot .'/grade/querylib.php');
 
 class GroupData {
+    static function get_all_course_grades_for_multiple_groups($group_ids, $course_id) {
+        $grade_sets = [];
+        foreach($group_ids as $user_id){
+            $grade_sets[] = GroupData::get_all_course_grades($user_id, $course_id);
+        }
+        return $grade_sets;
+    }
 
     static function get_all_course_grades($group_id, $course_id){
         global $DB;
@@ -31,6 +38,13 @@ class GroupData {
         );
     }
 
+    static function get_performance_radar_for_multiple_groups($group_ids, $course_id) {
+        $grade_sets = [];
+        foreach($group_ids as $user_id){
+            $grade_sets[] = GroupData::get_performance_radar($user_id, $course_id);
+        }
+        return $grade_sets;
+    }
     static function get_performance_radar($group_id, $course_id){
         global $DB;
         $query = "SELECT grade_items.itemmodule, (AVG(grade_grades.finalgrade)/AVG(grade_items.grademax)) as avggraderatio, grade_items.itemname
