@@ -26,6 +26,7 @@ class ClassData {
             $grades[] = round($record->grade, 2);
         }
         return array(
+            'label' => get_string('full_class', 'block_moodlean'),
             'values' => $grades,
             'labels' => $labels
         );
@@ -47,6 +48,7 @@ class ClassData {
             $ratios[] = round($record->avggraderatio, 2);
         }
         return array(
+            'label' => get_string('full_class', 'block_moodlean'),
             'values' => $ratios,
             'labels' => $labels
         );

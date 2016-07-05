@@ -43,8 +43,8 @@ $string['enabled'] = 'Activado';
 $string['disabled'] = 'Desactivado';
 
 
-$string['chart_primary_color'] = 'Color primerio para gráfica';
-$string['chart_primary_color_description'] = 'Elige el color primario para la visualización de las gráficas';
+$string['chart_color'] = 'Color #{$a} para gráfica';
+$string['chart_color_description'] = 'Elige el color #{$a} para la visualización de las gráficas';$string['chart_color_1'] = 'Color #1 para gráfica';
 $string['chart_background_opacity'] = 'Transparencia de fondo de gráfica';
 $string['chart_line_opacity'] = 'Transparencia de trazo de gráfica';
 $string['chart_opacity_description'] = 'Introduce un valor para la transparencia, ha de ser un entero entre 0 y 100';
@@ -62,3 +62,4 @@ $string['compare'] = "Comparar analíticas";
 $string['no_more_selections_allowed'] = "Has alcanzado el máximo de selecciones posible.\\nPor favor, deselecciona alguno de los seleccionados antes de seleccionar otro.";
 
 $string['manual_grade'] = "Calificación manual (actividades fuera de Moodle)";
+$string['full_class'] = "Clase completa";
