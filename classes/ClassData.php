@@ -23,7 +23,7 @@ class ClassData {
         $labels = array();
         foreach($records as $record){
             $labels[] = "'".$record->itemname."'";
-            $grades[] = $record->grade;
+            $grades[] = round($record->grade, 2);
         }
         return array(
             'values' => $grades,
@@ -44,7 +44,7 @@ class ClassData {
         $labels = array();
         foreach($records as $record){
             $labels[] = "'".$record->itemmodule."'";
-            $ratios[] = $record->avggraderatio;
+            $ratios[] = round($record->avggraderatio, 2);
         }
         return array(
             'values' => $ratios,

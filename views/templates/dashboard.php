@@ -117,7 +117,7 @@
                 max: 1,
                 maxTicksLimit: 5,
                 callback: function (value) {
-                    return ('' + value).substr(0, 3);
+                    return ((Math.round(value * 100))/100);
                 }
             }
         },
