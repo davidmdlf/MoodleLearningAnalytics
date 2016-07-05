@@ -105,18 +105,18 @@ if($is_comparator_selection) {
     switch ($type) {
         case 'student':
             foreach ($students as $student) {
-                echo '<div><input class="analytics_entity_checkbox" type="checkbox" name="student_ids['.$student->id.']" value="' . $student->id . '">' . $student->firstname . ' ' . $student->lastname . '</input></div>';
+                echo '<div><input class="analytics_entity_checkbox" type="checkbox" id="student_ids['.$student->id.']" name="student_ids['.$student->id.']" value="' . $student->id . '"/><label for="student_ids['.$student->id.']">'. $student->firstname . ' ' . $student->lastname . '</label></div>';
             }
             break;
         case 'group':
             foreach ($groups->groups as $group) {
-                echo '<div><input class="analytics_entity_checkbox" type="checkbox" name="group_ids['.$group->id.']"  value="' . $group->id . '">' . $group->name . '</input></div>';
+                echo '<div><input class="analytics_entity_checkbox" type="checkbox" id="group_ids['.$group->id.']" name="group_ids['.$group->id.']"  value="' . $group->id . '"/><label for="group_ids['.$group->id.']">'. $group->name .'</label></div>';
             }
             break;
     }
     echo '<div><input type="hidden" name="course_id" value="' . $courseid. '">';
     echo '<div><input type="hidden" name="type" value="' . $type. '">';
-    echo '<div><input type="submit" value="' . get_string("compare", "block_moodlean") . '">';
+    echo '<div class="compareBtnBox"><input type="submit" value="' . get_string("compare", "block_moodlean") . '">';
     echo '</form>';
 }
 echo '</section>';

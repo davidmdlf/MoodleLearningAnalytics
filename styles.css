@@ -37,3 +37,7 @@ section.tabs-section {
 .tab-50 {
     width: 50%;
 }
+.compareBtnBox {
+    text-align: right;
+    margin-top: 2rem;
+}

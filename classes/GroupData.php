@@ -60,7 +60,6 @@ class GroupData {
         $ratios = array();
         $labels = array();
         foreach($records as $record){
-            echo  $record->itemmodule."<br>";
             $labels[] = $record->itemmodule != "manual" && !empty($record->itemmodule) ? "'".get_string('modulename', "mod_".$record->itemmodule)."'" : "'".get_string('manual_grade', "block_moodlean")."'" ;
             $ratios[] = $record->avggraderatio;
         }
