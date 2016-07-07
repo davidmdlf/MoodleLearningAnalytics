@@ -1,0 +1,15 @@
+.dashboard-header > h2 {
+    margin-bottom: 0;
+    line-height: 100%;
+}
+
+.dashboard-header > h3 {
+    line-height: 100%;
+    margin-top: 10px;
+}
+
+.dashboard-header img {
+    position: relative;
+    top: -3px;
+    margin-right: 10px;
+}

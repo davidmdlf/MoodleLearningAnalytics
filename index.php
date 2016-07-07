@@ -1,3 +1,4 @@
+<script src="js/jquery.3.0.min.js"></script>
 <?php
 // This file is part of Moodle - http://moodle.org/
 //
@@ -23,10 +24,11 @@
  */
 
 require_once '../../config.php';
+require_once 'classes/UrlGenerator.php';
 
-$courseid = required_param('id', PARAM_INT);
+$courseid = required_param('course_id', PARAM_INT);
 
-$PAGE->set_url('/moodlean/index.php', array('id' => $courseid));
+$PAGE->set_url('/moodlean/index.php', array('course_id' => $courseid));
 
 /// basic access checks
 if (!$course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST)) {
@@ -47,32 +49,88 @@ $PAGE->set_title(get_string('pluginname', "block_moodlean") . " | $course->fulln
 $PAGE->set_heading($course->fullname);
 $PAGE->set_pagelayout('standard');
 
+$is_comparator_selection = false;
+if(isset($_GET['is_comparator'])){
+    $is_comparator_selection = true;
+}
 
 echo $OUTPUT->header();
-echo '<ul>';
+
 switch ($type) {
     case 'student':
-        $students = get_enrolled_users(context_course::instance($courseid));
-        foreach ($students as $student) {
-            $params = array(
-                'type' => $type,
-                $type . '_id' => $student->id,
-                'course_id' => $course->id
-            );
-            echo '<li><a href="analytics.php?' . http_build_query($params, '', '&') . '">' . $student->firstname . ' ' . $student->lastname . '</a></li>';
-        }
+        echo '<div class="tab-50'.($is_comparator_selection?'':' selected').'">';
+        echo '<a href="'.UrlGenerator::to_student_selection().'">'.get_string("see_by_student", "block_moodlean").'</a>';
+        echo '</div>';
+        echo '<div class="tab-50'.($is_comparator_selection?' selected':'').'">';
+        echo '<a href="'.UrlGenerator::to_student_comparation_selection().'">'.get_string("compare", "block_moodlean").'</a>';
+        echo '</div>';echo '<section class="tabs-section">';
+        break;
+    case 'group':
+        echo '<div class="tab-50'.($is_comparator_selection?'':' selected').'">';
+        echo '<a href="'.UrlGenerator::to_group_selection().'">'.get_string("see_by_group", "block_moodlean").'</a>';
+        echo '</div>';
+        echo '<div class="tab-50'.($is_comparator_selection?' selected':'').'">';
+        echo '<a href="'.UrlGenerator::to_group_comparation_selection().'">'.get_string("compare", "block_moodlean").'</a>';
+        echo '</div>';echo '<section class="tabs-section">';        break;
+}
+
+
+echo '<ul class="analytics_single_selector">';
+switch ($type) {
+    case 'student':
+        $students = get_enrolled_users(context_course::instance($course->id), '', '', 'u.id, u.firstname, u.lastname', 'u.firstname');
         break;
     case 'group':
         $groups = groups_get_course_data($courseid);
-        foreach ($groups->groups as $group) {
-            $params = array(
-                'type' => $type,
-                $type . '_id' => $group->id,
-                'course_id' => $course->id
-            );
-            echo '<li><a href="analytics.php?' . http_build_query($params, '', '&') . '">' . $group->name . '</a></li>';
-        }
         break;
 }
-echo '</ul>';
+
+if(!$is_comparator_selection) {
+    switch ($type) {
+        case 'student':
+            foreach ($students as $student) {
+                echo '<li><a href="' . UrlGenerator::to_student_analytics($student->id) . '">' . $student->firstname . ' ' . $student->lastname . '</a></li>';
+            }
+            break;
+        case 'group':
+            foreach ($groups->groups as $group) {
+                echo '<li><a href="' . UrlGenerator::to_group_analytics($group->id) . '">' . $group->name . '</a></li>';
+            }
+            break;
+    }
+    echo '</ul>';
+}
+if($is_comparator_selection) {
+    echo '<form class="analytics_multiple_selector" method="post" action="analytics.php">';
+    switch ($type) {
+        case 'student':
+            foreach ($students as $student) {
+                echo '<div><input class="analytics_entity_checkbox" type="checkbox" id="student_ids['.$student->id.']" name="student_ids['.$student->id.']" value="' . $student->id . '"/><label for="student_ids['.$student->id.']">'. $student->firstname . ' ' . $student->lastname . '</label></div>';
+            }
+            break;
+        case 'group':
+            foreach ($groups->groups as $group) {
+                echo '<div><input class="analytics_entity_checkbox" type="checkbox" id="group_ids['.$group->id.']" name="group_ids['.$group->id.']"  value="' . $group->id . '"/><label for="group_ids['.$group->id.']">'. $group->name .'</label></div>';
+            }
+            break;
+    }
+    echo '<div><input type="hidden" name="course_id" value="' . $courseid. '">';
+    echo '<div><input type="hidden" name="type" value="' . $type. '">';
+    echo '<div class="compareBtnBox"><input type="submit" value="' . get_string("compare", "block_moodlean") . '">';
+    echo '</form>';
+}
+echo '</section>';
 echo $OUTPUT->footer();
+
+?>
+<script>
+    $(function(){
+        $('.analytics_entity_checkbox').change(function(){
+            console.log('changing');
+            if($('.analytics_entity_checkbox:checked').length > 5){
+                alert('<?php echo get_string('no_more_selections_allowed', 'block_moodlean'); ?>');
+                $(this).prop('checked', false)
+            }
+        });
+    })
+</script>

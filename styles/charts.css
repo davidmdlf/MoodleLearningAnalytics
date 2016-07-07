@@ -1,0 +1,74 @@
+.chartWrapper {
+    position: relative;
+    overflow: auto;
+}
+
+.chartWrapper > canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events:none;
+}
+
+.scrollChartContainer {
+    width: 100%;
+    overflow-x: scroll;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .visibletext {
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 105%;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.tooltip .visibletext {
+    font-size: 20px;
+    line-height: 28px;
+    padding: 2px;
+    height: 25px;
+    width: 25px;
+    color: #fff;
+    background-color: #222;
+    border-radius: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+
+.analyticSection {
+    border-top: 2px solid #ddd;
+    margin-bottom: 50px;
+    padding-top: 10px;
+}
+.radarSection {
+    margin: 15px 0px;
+    text-align: center;
+}
+.radarWrapper {
+    height: 500px;
+    max-width: 500px;
+    display: inline-block;
+}
